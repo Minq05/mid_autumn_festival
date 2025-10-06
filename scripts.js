@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // ===== STARS GENERATION (HERO) =====
 function initStars() {
     const starsContainer = document.getElementById('starsContainer');
-    const starCount = 150;
+    const starCount = 80; // Giảm từ 150 → 80
     
     for (let i = 0; i < starCount; i++) {
         const star = document.createElement('div');
@@ -28,6 +28,7 @@ function initStars() {
         star.style.top = `${Math.random() * 100}%`;
         star.style.animationDelay = `${Math.random() * 3}s`;
         star.style.animationDuration = `${2 + Math.random() * 3}s`;
+        star.style.willChange = 'opacity, transform';
         
         starsContainer.appendChild(star);
     }
@@ -36,7 +37,7 @@ function initStars() {
 // ===== STARS GENERATION (WISHES SECTION) =====
 function initWishesStars() {
     const wishesStarsContainer = document.getElementById('wishesBgStars');
-    const starCount = 100;
+    const starCount = 50; // Giảm từ 100 → 50
     
     for (let i = 0; i < starCount; i++) {
         const star = document.createElement('div');
@@ -49,6 +50,7 @@ function initWishesStars() {
         star.style.top = `${Math.random() * 100}%`;
         star.style.animationDelay = `${Math.random() * 3}s`;
         star.style.animationDuration = `${2 + Math.random() * 4}s`;
+        star.style.willChange = 'opacity, transform';
         
         wishesStarsContainer.appendChild(star);
     }
@@ -57,7 +59,7 @@ function initWishesStars() {
 // ===== PARTICLES GENERATION =====
 function initParticles() {
     const particlesContainer = document.getElementById('particles');
-    const particleCount = 40;
+    const particleCount = 20; // Giảm từ 40 → 20
     
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
@@ -66,6 +68,7 @@ function initParticles() {
         particle.style.top = `${Math.random() * 100}%`;
         particle.style.animationDelay = `${Math.random() * 10}s`;
         particle.style.animationDuration = `${8 + Math.random() * 6}s`;
+        particle.style.willChange = 'transform, opacity';
         particlesContainer.appendChild(particle);
     }
 }
@@ -73,15 +76,16 @@ function initParticles() {
 // ===== FLOATING LANTERNS =====
 function initFloatingLanterns() {
     const lanternsContainer = document.getElementById('floatingLanterns');
-    const lanternCount = 8;
+    const lanternCount = 5; // Giảm từ 8 → 5
     
     for (let i = 0; i < lanternCount; i++) {
         const lantern = document.createElement('div');
         lantern.className = 'lantern';
         lantern.style.left = `${Math.random() * 100}%`;
         lantern.style.bottom = '-100px';
-        lantern.style.animationDelay = `${i * 3}s`;
-        lantern.style.animationDuration = `${15 + Math.random() * 8}s`;
+        lantern.style.animationDelay = `${i * 4}s`;
+        lantern.style.animationDuration = `${18 + Math.random() * 6}s`;
+        lantern.style.willChange = 'transform, opacity';
         lanternsContainer.appendChild(lantern);
     }
 }
@@ -106,27 +110,26 @@ function initSubtitleAnimation() {
 function initFireworks() {
     const fireworksContainer = document.getElementById('fireworks');
     
-    // Create fireworks periodically
+    // Create fireworks periodically - giảm tần suất
     setInterval(() => {
-        if (Math.random() > 0.7) { // 30% chance every interval
+        if (Math.random() > 0.85) { // Giảm từ 30% → 15% chance
             createFirework(fireworksContainer);
         }
-    }, 2000);
+    }, 3000); // Tăng từ 2s → 3s
     
-    // Initial fireworks
+    // Initial fireworks - giảm số lượng
     setTimeout(() => createFirework(fireworksContainer), 1500);
-    setTimeout(() => createFirework(fireworksContainer), 2000);
     setTimeout(() => createFirework(fireworksContainer), 2500);
 }
 
 function createFirework(container) {
-    const colors = ['#FFD700', '#FF6B6B', '#4ECDC4', '#95E1D3', '#F38181', '#AA96DA'];
+    const colors = ['#FFD700', '#FF6B6B', '#4ECDC4', '#95E1D3'];
     const color = colors[Math.floor(Math.random() * colors.length)];
     
-    const x = Math.random() * 80 + 10; // 10% to 90%
-    const y = Math.random() * 50 + 10; // 10% to 60%
+    const x = Math.random() * 80 + 10;
+    const y = Math.random() * 50 + 10;
     
-    const particleCount = 20 + Math.floor(Math.random() * 15);
+    const particleCount = 15 + Math.floor(Math.random() * 10); // Giảm từ 20-35 → 15-25
     
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
@@ -134,10 +137,11 @@ function createFirework(container) {
         particle.style.left = `${x}%`;
         particle.style.top = `${y}%`;
         particle.style.background = color;
-        particle.style.boxShadow = `0 0 10px ${color}`;
+        particle.style.boxShadow = `0 0 8px ${color}`;
+        particle.style.willChange = 'transform, opacity';
         
         const angle = (Math.PI * 2 * i) / particleCount;
-        const velocity = 50 + Math.random() * 50;
+        const velocity = 40 + Math.random() * 40; // Giảm velocity
         const tx = Math.cos(angle) * velocity;
         const ty = Math.sin(angle) * velocity;
         
@@ -146,7 +150,7 @@ function createFirework(container) {
         
         container.appendChild(particle);
         
-        setTimeout(() => particle.remove(), 1500);
+        setTimeout(() => particle.remove(), 1200); // Giảm từ 1500ms → 1200ms
     }
 }
 
@@ -260,7 +264,7 @@ function debounce(func, wait) {
 // Apply debounce to scroll-heavy functions
 window.addEventListener('scroll', debounce(() => {
     // Additional scroll-based animations can be added here
-}, 10));
+}, 50)); // Tăng từ 10ms → 50ms
 
 // ===== ACCESSIBILITY ENHANCEMENTS =====
 // Keyboard navigation for buttons
@@ -293,16 +297,21 @@ function initCustomCursor() {
     let dotX = 0;
     let dotY = 0;
     
-    // Track mouse position
+    // Track mouse position - throttled
+    let lastMoveTime = 0;
     document.addEventListener('mousemove', (e) => {
+        const now = Date.now();
+        if (now - lastMoveTime < 16) return; // ~60fps throttle
+        lastMoveTime = now;
+        
         mouseX = e.clientX;
         mouseY = e.clientY;
         
         // Show cursor
         cursor.classList.add('active');
         
-        // Create trail effect
-        if (Math.random() > 0.8) {
+        // Create trail effect - giảm tần suất
+        if (Math.random() > 0.92) { // Giảm từ 80% → 92%
             createCursorTrail(e.clientX, e.clientY);
         }
     });
@@ -324,20 +333,15 @@ function initCustomCursor() {
     // Smooth cursor animation
     function animateCursor() {
         // Smooth follow for outer circle
-        cursorX += (mouseX - cursorX) * 0.15;
-        cursorY += (mouseY - cursorY) * 0.15;
+        cursorX += (mouseX - cursorX) * 0.2; // Tăng từ 0.15 → 0.2 (nhanh hơn)
+        cursorY += (mouseY - cursorY) * 0.2;
         
         // Faster follow for dot
-        dotX += (mouseX - dotX) * 0.25;
-        dotY += (mouseY - dotY) * 0.25;
+        dotX += (mouseX - dotX) * 0.3; // Tăng từ 0.25 → 0.3
+        dotY += (mouseY - dotY) * 0.3;
         
-        cursor.style.left = cursorX + 'px';
-        cursor.style.top = cursorY + 'px';
-        cursor.style.transform = 'translate(-50%, -50%)';
-        
-        cursorDot.style.left = dotX + 'px';
-        cursorDot.style.top = dotY + 'px';
-        cursorDot.style.transform = 'translate(-50%, -50%)';
+        cursor.style.transform = `translate(${cursorX}px, ${cursorY}px) translate(-50%, -50%)`;
+        cursorDot.style.transform = `translate(${dotX}px, ${dotY}px) translate(-50%, -50%)`;
         
         requestAnimationFrame(animateCursor);
     }
@@ -350,9 +354,10 @@ function createCursorTrail(x, y) {
     trail.className = 'cursor-trail';
     trail.style.left = x + 'px';
     trail.style.top = y + 'px';
+    trail.style.willChange = 'transform, opacity';
     document.body.appendChild(trail);
     
-    setTimeout(() => trail.remove(), 500);
+    setTimeout(() => trail.remove(), 400); // Giảm từ 500ms → 400ms
 }
 
 // ===== CONSOLE EASTER EGG =====
